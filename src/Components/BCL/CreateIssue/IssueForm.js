@@ -46,7 +46,7 @@ function IsseForm(props){
                         {/* summery of the bug */}
                         <Form.Group>
                             <Form.Label>Summary</Form.Label>
-                            <Form.Control type="text" placeholder="Summery of the bug" name="summery" onChange={formik.handleChange} onBlur={formik.handleBlur}
+                            <Form.Control as="textarea" rows={4} placeholder="Summery of the bug" name="summery" onChange={formik.handleChange} onBlur={formik.handleBlur}
                                 value={formik.values.summery}></Form.Control>
                             {formik.errors.summery && formik.touched.summery ? <Form.Text style={warningstyle}>{formik.errors.summery}</Form.Text> : null}
                         </Form.Group>
