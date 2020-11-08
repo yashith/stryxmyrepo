@@ -1,27 +1,35 @@
 import React, { Component, useState } from 'react'
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import { Table, Row, Col, Button, Card, NavLink, Form, FormControl } from 'react-bootstrap';
-import Modal from 'react-modal'
+import { Table, Row, Col, Button, Card, NavLink, Form, FormControl, Modal,Badge} from 'react-bootstrap';
+//import Modal from 'react-modal'
 import IssueForm from '../CreateIssue/IssueForm'
 import Issuecard from '../IssueTable/Issecard'
+import { borderRadius } from 'react-select/src/theme';
 //import Pagination from './Pagination';
 
 // Dummy data & prority labaling function
+
 var bug = [
     {
         priority: "High",
         id: "1",
-        summery: "Summery 1"
+        summary: "Summary 1",
+        result:"",
+        expected:'',
     }
     , {
         priority: "Medium",
         id: "2",
-        summery: "Summery 2"
+        summary: "Summary 2",
+        result:"",
+        expected:'',
     },
     {
         priority: "Low",
         id: "3",
-        summery: "Summery 3"
+        summary: "Summary 3",
+        result:"",
+        expected:'',
     }
 ];
 
@@ -39,8 +47,10 @@ function bagetype(priority) {
 
 
 
+
 function ProjectIssues() {
     const [isModelOpen, setisModelOpen] = useState(false);
+    
     return (
         <div className="">
 
@@ -86,8 +96,12 @@ function ProjectIssues() {
                                         onClick={() => setisModelOpen(true)}
                                     >
                                         Add Issue</Button>
-                                    <Modal isOpen={isModelOpen}>
-                                        <IssueForm cl={() => setisModelOpen(false)} />
+                                    <Modal size="lg" show={isModelOpen}>
+                                        <Modal.Body>
+                                            <IssueForm cl={() => setisModelOpen(false)} />
+                                           
+                                        </Modal.Body>
+
                                     </Modal>
 
                                 </Col>
@@ -103,13 +117,41 @@ function ProjectIssues() {
                                 </Col>
                             </div>
                         </Row>
-                        <Row>
+                        {/* <Row>
 
                             {
-                                bug.map((bug) => <Issuecard id={'#' + bug.id} summ={bug.summery} priority={bug.priority} badgetype={bagetype(bug.priority)} />)
+                                bug.map((bug) => <Issuecard id={'#' + bug.id} summ={bug.Summary} priority={bug.priority} badgetype={bagetype(bug.priority)} />)
                             }
 
-                           
+
+                        </Row> */}
+                        <Row>
+                            <Table>
+                                <thead>
+                                    <tr>
+                                        <th>
+                                            #id
+                                        </th>
+                                        <th>
+                                            Summary
+                                        </th>
+                                        <th> 
+                                            Priority
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {
+                                        bug.map((bug)=>                                    
+                                            <tr>
+                                                <td>{'#' + bug.id}</td>
+                                                <td>{bug.summary}</td>
+                                                <td><Badge variant={bagetype(bug.priority)}>{bug.priority}</Badge></td>
+                                            </tr>                                    
+                                        )
+                                    }
+                                </tbody>
+                            </Table>
                         </Row>
 
 
