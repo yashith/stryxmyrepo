@@ -2,7 +2,7 @@ import React from 'react';
 import { useFormik } from 'formik';
 import { Container, Row, Form,  Button,Col } from 'react-bootstrap';
 
-function IsseForm(props){
+function IsseForm(props,){
  
     const warningstyle = { color: 'red' };
     const validate = values => {
@@ -11,8 +11,8 @@ function IsseForm(props){
         if (!values.priority) {
             errors.priority = 'Required'
         }
-        if (!values.summery) {
-            errors.summery = 'Required'
+        if (!values.summary) {
+            errors.summary = 'Required'
         }
         if (!values.expected) {
             errors.expected = 'Required'
@@ -26,18 +26,18 @@ function IsseForm(props){
     }
     const formik = useFormik({
         initialValues: {
-            priority: '', //Import project value from project card
-            summery: '',
+            priority: '', 
+            summary: '',
             result: '',
             expected: '',
-            id:"1",
         },
         validate,
-        onSubmit: values => {alert(JSON.stringify(values, null, 2));},
-            // alert(JSON.stringify(values, null, 2));
-            //props.setbugs(props.bugs.push(values));
-            // console.log(values);
-            // console.log(values.priority);
+        onSubmit: values => {
+
+            props.setbuglist([...props.buglist,{priority:values.priority, summary:values.summary,result:values.result,expected:values.expected,id:Math.floor(Math.random()*1000)}]);
+            
+        },
+
         
             
     });
@@ -56,12 +56,12 @@ function IsseForm(props){
                             {formik.errors.project && formik.touched.project ? <Form.Text style={warningstyle}>{formik.errors.project}</Form.Text> : null}
                         </Form.Group>
                         
-                        {/* summery of the bug */}
+                        {/* summary of the bug */}
                         <Form.Group>
                             <Form.Label>Summary</Form.Label>
-                            <Form.Control as="textarea" rows={4} placeholder="Summery of the bug" name="summery" onChange={formik.handleChange} onBlur={formik.handleBlur}
-                                value={formik.values.summery}></Form.Control>
-                            {formik.errors.summery && formik.touched.summery ? <Form.Text style={warningstyle}>{formik.errors.summery}</Form.Text> : null}
+                            <Form.Control as="textarea" rows={4} placeholder="summary of the bug" name="summary" onChange={formik.handleChange} onBlur={formik.handleBlur}
+                                value={formik.values.summary}></Form.Control>
+                            {formik.errors.summary && formik.touched.summary ? <Form.Text style={warningstyle}>{formik.errors.summary}</Form.Text> : null}
                         </Form.Group>
                         {/* Resulting output */}
                         <Form.Group>

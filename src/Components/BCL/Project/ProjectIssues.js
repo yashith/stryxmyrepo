@@ -50,6 +50,7 @@ function bagetype(priority) {
 
 function ProjectIssues() {
     const [isModelOpen, setisModelOpen] = useState(false);
+    const [buglist, setbuglist] = useState([])
     
     return (
         <div className="">
@@ -98,7 +99,7 @@ function ProjectIssues() {
                                         Add Issue</Button>
                                     <Modal size="lg" show={isModelOpen}>
                                         <Modal.Body>
-                                            <IssueForm cl={() => setisModelOpen(false)} />
+                                            <IssueForm cl={() => setisModelOpen(false)} buglist={buglist} setbuglist={setbuglist}/>
                                            
                                         </Modal.Body>
 
@@ -142,7 +143,7 @@ function ProjectIssues() {
                                 </thead>
                                 <tbody>
                                     {
-                                        bug.map((bug)=>                                    
+                                        buglist.map((bug)=>                                    
                                             <tr>
                                                 <td>{'#' + bug.id}</td>
                                                 <td>{bug.summary}</td>
