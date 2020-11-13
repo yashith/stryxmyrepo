@@ -17,3 +17,4 @@
 [1027/115718.321:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\User\AppData\Local\Google\Chrome\User Data\Crashpad\reports\5a0224da-8a51-47b9-bb97-2372d59397d7.dmp: The system cannot find the file specified. (0x2)
 [1027/115718.321:ERROR:filesystem_win.cc(116)] GetFileAttributes C:\Users\User\AppData\Local\Google\Chrome\User Data\Crashpad\reports\03e6cb25-5446-4f01-acc3-075bf68cb7fb.dmp: The system cannot find the file specified. (0x2)
 [1027/115718.321:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1111/114717.919:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

@@ -4,34 +4,12 @@ import { Table, Row, Col, Button, Card, NavLink, Form, FormControl, Modal,Badge}
 //import Modal from 'react-modal'
 import IssueForm from '../CreateIssue/IssueForm'
 import Issuecard from '../IssueTable/Issecard'
-import { borderRadius } from 'react-select/src/theme';
+import './table.css';
+import { render } from '@testing-library/react';
 //import Pagination from './Pagination';
 
-// Dummy data & prority labaling function
 
-var bug = [
-    {
-        priority: "High",
-        id: "1",
-        summary: "Summary 1",
-        result:"",
-        expected:'',
-    }
-    , {
-        priority: "Medium",
-        id: "2",
-        summary: "Summary 2",
-        result:"",
-        expected:'',
-    },
-    {
-        priority: "Low",
-        id: "3",
-        summary: "Summary 3",
-        result:"",
-        expected:'',
-    }
-];
+
 
 function bagetype(priority) {
 
@@ -45,7 +23,9 @@ function bagetype(priority) {
     }
 }
 
-
+function tableticket(e){
+    render(<Issuecard/>);
+}
 
 
 function ProjectIssues() {
@@ -144,13 +124,14 @@ function ProjectIssues() {
                                 <tbody>
                                     {
                                         buglist.map((bug)=>                                    
-                                            <tr>
+                                            <tr className="highligh" id={bug.id} onClick={()=>{tableticket(bug.id)}} key={bug.id}>
                                                 <td>{'#' + bug.id}</td>
-                                                <td>{bug.summary}</td>
+                                                <td className="noover"><div>{bug.summary}</div></td>
                                                 <td><Badge variant={bagetype(bug.priority)}>{bug.priority}</Badge></td>
                                             </tr>                                    
                                         )
                                     }
+
                                 </tbody>
                             </Table>
                         </Row>

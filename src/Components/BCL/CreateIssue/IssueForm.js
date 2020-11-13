@@ -35,7 +35,7 @@ function IsseForm(props,){
         onSubmit: values => {
 
             props.setbuglist([...props.buglist,{priority:values.priority, summary:values.summary,result:values.result,expected:values.expected,id:Math.floor(Math.random()*1000)}]);
-            
+            props.cl(); 
         },
 
         
@@ -76,6 +76,11 @@ function IsseForm(props,){
                             <Form.Control type="text" name="expected" onChange={formik.handleChange} onBlur={formik.handleBlur}
                                 value={formik.values.expected}></Form.Control>
                             {formik.errors.expected && formik.touched.expected ? <Form.Text style={warningstyle}>{formik.errors.expected}</Form.Text> : null}
+                        </Form.Group>
+                        {/* File upload */}
+                        <Form.Group>
+                            <Form.Label>Attachments</Form.Label>
+                            <Form.File  name="attachments" ></Form.File>
                         </Form.Group>
                         
                         <Button type='submit'  >Add issue</Button>
