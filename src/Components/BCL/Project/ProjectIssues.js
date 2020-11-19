@@ -23,15 +23,22 @@ function bagetype(priority) {
     }
 }
 
-function tableticket(e){
-    render(<Issuecard/>);
-}
+
 
 
 function ProjectIssues() {
     const [isModelOpen, setisModelOpen] = useState(false);
     const [buglist, setbuglist] = useState([])
     
+    function tableticket(e){
+        for (var i = 0; i < buglist.length; i++) {
+            if (buglist[i].id === e) {
+                render(<Issuecard  priority={buglist[i].priority} type={buglist[i].type}  summary={buglist[i].summary} variant={bagetype(buglist[i].priority)} />);
+            }
+        }
+        
+    }
+
     return (
         <div className="">
 
@@ -114,7 +121,7 @@ function ProjectIssues() {
                                             #id
                                         </th>
                                         <th>
-                                            Summary
+                                            Title
                                         </th>
                                         <th> 
                                             Priority
@@ -126,7 +133,7 @@ function ProjectIssues() {
                                         buglist.map((bug)=>                                    
                                             <tr className="highligh" id={bug.id} onClick={()=>{tableticket(bug.id)}} key={bug.id}>
                                                 <td>{'#' + bug.id}</td>
-                                                <td className="noover"><div>{bug.summary}</div></td>
+                                                <td className="noover"><div>{bug.title}</div></td>
                                                 <td><Badge variant={bagetype(bug.priority)}>{bug.priority}</Badge></td>
                                             </tr>                                    
                                         )

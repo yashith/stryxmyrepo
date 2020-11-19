@@ -11,14 +11,11 @@ function IsseForm(props,){
         if (!values.priority) {
             errors.priority = 'Required'
         }
+        if (!values.title) {
+            errors.title = 'Required'
+        }
         if (!values.summary) {
             errors.summary = 'Required'
-        }
-        if (!values.expected) {
-            errors.expected = 'Required'
-        }
-        if (!values.result) {
-            errors.result = 'Required'
         }
 
         return errors;
@@ -26,15 +23,15 @@ function IsseForm(props,){
     }
     const formik = useFormik({
         initialValues: {
-            priority: '', 
+            priority: '',
+            type:'',
+            title:'', 
             summary: '',
-            result: '',
-            expected: '',
         },
         validate,
         onSubmit: values => {
 
-            props.setbuglist([...props.buglist,{priority:values.priority, summary:values.summary,result:values.result,expected:values.expected,id:Math.floor(Math.random()*1000)}]);
+            props.setbuglist([...props.buglist,{priority:values.priority,type:values.type,summary:values.summary,title:values.title,id:Math.floor(Math.random()*1000)}]);
             props.cl(); 
         },
 
@@ -42,6 +39,7 @@ function IsseForm(props,){
             
     });
     const prioritylist=['Low','Medium','High'];
+    const typelist=['Bug','IT Supprot','etc..'];
 
     return (
         <div>
@@ -56,6 +54,22 @@ function IsseForm(props,){
                             {formik.errors.project && formik.touched.project ? <Form.Text style={warningstyle}>{formik.errors.project}</Form.Text> : null}
                         </Form.Group>
                         
+                        <Form.Group >
+                            <Form.Label>Type</Form.Label>
+                            <Form.Control as="select"  name="type" onChange={formik.handleChange} onBlur={formik.handleBlur} value={formik.values.type}>{/*set error handler*/}
+                                {typelist.map((type) => <option value={type} label={type}/>)}
+                                
+                            </Form.Control>
+                            {formik.errors.project && formik.touched.project ? <Form.Text style={warningstyle}>{formik.errors.project}</Form.Text> : null}
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>Title</Form.Label>
+                            <Form.Control type="text" name="title" onChange={formik.handleChange} onBlur={formik.handleBlur}
+                                value={formik.values.title}></Form.Control>
+                            {formik.errors.title && formik.touched.title ? <Form.Text style={warningstyle}>{formik.errors.title}</Form.Text> : null}
+                        </Form.Group>
+
                         {/* summary of the bug */}
                         <Form.Group>
                             <Form.Label>Summary</Form.Label>
@@ -64,26 +78,26 @@ function IsseForm(props,){
                             {formik.errors.summary && formik.touched.summary ? <Form.Text style={warningstyle}>{formik.errors.summary}</Form.Text> : null}
                         </Form.Group>
                         {/* Resulting output */}
-                        <Form.Group>
+                        {/* <Form.Group>
                             <Form.Label>Outputted Result</Form.Label>
                             <Form.Control type="text" name="result" onChange={formik.handleChange} onBlur={formik.handleBlur}
                                 value={formik.values.result}></Form.Control>
                             {formik.errors.result && formik.touched.result ? <Form.Text style={warningstyle}>{formik.errors.result}</Form.Text> : null}
-                        </Form.Group>
+                        </Form.Group> */}
                         {/* Expected output */}
-                        <Form.Group>
+                        {/* <Form.Group>
                             <Form.Label>Expected Result</Form.Label>
                             <Form.Control type="text" name="expected" onChange={formik.handleChange} onBlur={formik.handleBlur}
                                 value={formik.values.expected}></Form.Control>
                             {formik.errors.expected && formik.touched.expected ? <Form.Text style={warningstyle}>{formik.errors.expected}</Form.Text> : null}
-                        </Form.Group>
+                        </Form.Group> */}
                         {/* File upload */}
                         <Form.Group>
                             <Form.Label>Attachments</Form.Label>
                             <Form.File  name="attachments" ></Form.File>
                         </Form.Group>
                         
-                        <Button type='submit'  >Add issue</Button>
+                        <Button type='submit' style={{marginRight:'20px'}} >Add issue</Button>
                         <Button type='button'  onClick={props.cl} >Close</Button>
                        
                       
